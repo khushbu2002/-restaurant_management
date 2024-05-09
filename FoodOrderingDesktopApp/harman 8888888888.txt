@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= harman
+Phone Number= 8888888888
+Dish Ordered= Cold Drink
+Quantity = 14 
+
+Amount Paid= 280

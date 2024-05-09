@@ -1,0 +1,11 @@
+                       Food Ordering                        
+date: 
+______________________________________________________
+custmer details: 
+
+Name= kk
+Phone Number= 321
+Dish Ordered= qwe
+Quantity = 1 
+
+Amount Paid= 123

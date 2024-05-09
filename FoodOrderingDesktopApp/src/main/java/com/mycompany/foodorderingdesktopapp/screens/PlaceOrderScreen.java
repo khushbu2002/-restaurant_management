@@ -5,6 +5,14 @@
 package com.mycompany.foodorderingdesktopapp.screens;
 
 import Interfaces.Values;
+import com.mycompany.foodorderingdesktopapp.database_connectivity.ConnectionClass;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.*;
 
 /**
@@ -14,13 +22,15 @@ import models.*;
 public class PlaceOrderScreen extends javax.swing.JFrame implements Values{
 
     private final UserModel currentUser;
-
+    private DishModel selectedDish=new DishModel();
     /**
      * Creates new form PlaceOrderScreen
      */
     public PlaceOrderScreen(UserModel user) {
         currentUser=user;
         initComponents();
+        priceTF.setText("0");
+        updateDishesTable();
     }
 
     /**
@@ -32,62 +42,39 @@ public class PlaceOrderScreen extends javax.swing.JFrame implements Values{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        backgroundPanell = new javax.swing.JPanel();
         placeOrderHeadingLabel = new javax.swing.JLabel();
-        billIDLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        customerNameTF = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        contactTF = new javax.swing.JTextField();
-        billIdLAbel2 = new javax.swing.JLabel();
+        menuScrollPanel = new javax.swing.JScrollPane();
+        menuTabel = new javax.swing.JTable();
+        addToCArtButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        cDRLabel = new javax.swing.JLabel();
+        customerNameLabel = new javax.swing.JLabel();
         contactLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         dishNameLabel = new javax.swing.JLabel();
         quantityLabel = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        addToCArtButton = new javax.swing.JButton();
-        clearButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        dishNameTF = new javax.swing.JTextField();
         priceLabel = new javax.swing.JLabel();
+        customerNameTF = new javax.swing.JTextField();
+        contactTF = new javax.swing.JTextField();
+        dishNameTF = new javax.swing.JTextField();
+        quantitySpinner = new javax.swing.JSpinner();
         priceTF = new javax.swing.JTextField();
+        clearButton = new javax.swing.JButton();
+        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 450));
-        setPreferredSize(new java.awt.Dimension(800, 450));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        backgroundPanell.setBackground(new java.awt.Color(255, 255, 255));
+        backgroundPanell.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        placeOrderHeadingLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
+        placeOrderHeadingLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 24)); // NOI18N
+        placeOrderHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderHeadingLabel.setText("Place Order");
-        jPanel1.add(placeOrderHeadingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 16, 119, 32));
+        backgroundPanell.add(placeOrderHeadingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 16, 160, 32));
 
-        billIDLabel1.setText("Bill Id");
-        jPanel1.add(billIDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 66, 90, -1));
-
-        jLabel2.setText("Customer Details and Requirments");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 110, 194, -1));
-
-        customerNameTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerNameTFActionPerformed(evt);
-            }
-        });
-        jPanel1.add(customerNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 144, 192, 31));
-
-        jLabel3.setText("Customer Name");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 151, 90, -1));
-        jPanel1.add(contactTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 193, 190, 30));
-
-        billIdLAbel2.setText("--");
-        jPanel1.add(billIdLAbel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 76, 30, -1));
-
-        contactLabel.setText("Phone Number");
-        jPanel1.add(contactLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 193, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        menuTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,41 +85,110 @@ public class PlaceOrderScreen extends javax.swing.JFrame implements Values{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        menuTabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuTabelMousePressed(evt);
+            }
+        });
+        menuScrollPanel.setViewportView(menuTabel);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 58, -1, 392));
+        backgroundPanell.add(menuScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 58, -1, 392));
 
-        dishNameLabel.setText("Dish Name");
-        jPanel1.add(dishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 227, -1, -1));
-
-        quantityLabel.setText("Quantity");
-        jPanel1.add(quantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 269, -1, -1));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 277, 191, -1));
-
+        addToCArtButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         addToCArtButton.setText("Add to Cart");
-        jPanel1.add(addToCArtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+        addToCArtButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addToCArtButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanell.add(addToCArtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 410, 120, -1));
 
-        clearButton.setText("Clear");
-        jPanel1.add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 410, -1, -1));
+        backButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        backButton.setText("BACK");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanell.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 0, -1, -1));
 
-        jButton3.setText("jButton3");
-        jButton3.setMaximumSize(new java.awt.Dimension(72, 22));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 0, -1, -1));
-        jPanel1.add(dishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 241, 190, -1));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0 , 80));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cDRLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        cDRLabel.setForeground(new java.awt.Color(255, 255, 255));
+        cDRLabel.setText("Customer Details and Requirments");
+        jPanel1.add(cDRLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 270, -1));
+
+        customerNameLabel.setBackground(new java.awt.Color(0, 0, 0));
+        customerNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        customerNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        customerNameLabel.setText("Customer Name");
+        jPanel1.add(customerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, -1));
+
+        contactLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        contactLabel.setForeground(new java.awt.Color(255, 255, 255));
+        contactLabel.setText("Phone Number");
+        jPanel1.add(contactLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 100, -1));
+
+        dishNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        dishNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dishNameLabel.setText("Dish Name");
+        jPanel1.add(dishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 80, -1));
+
+        quantityLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        quantityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        quantityLabel.setText("Quantity");
+        jPanel1.add(quantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, -1));
+
+        priceLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        priceLabel.setForeground(new java.awt.Color(255, 255, 255));
         priceLabel.setText("Price");
-        jPanel1.add(priceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 316, 45, -1));
-        jPanel1.add(priceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 311, 191, -1));
+        jPanel1.add(priceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 60, -1));
+
+        customerNameTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerNameTFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customerNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 31));
+        jPanel1.add(contactTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+        jPanel1.add(dishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 200, -1));
+
+        quantitySpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                quantitySpinnerStateChanged(evt);
+            }
+        });
+        jPanel1.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 200, -1));
+
+        priceTF.setEnabled(false);
+        jPanel1.add(priceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, -1));
+
+        clearButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 110, -1));
+
+        backgroundPanell.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+
+        iconLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\foodapp11.jpg")); // NOI18N
+        iconLabel.setText("jLabel1");
+        backgroundPanell.add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(backgroundPanell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(backgroundPanell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -143,27 +199,157 @@ public class PlaceOrderScreen extends javax.swing.JFrame implements Values{
         // TODO add your handling code here:
     }//GEN-LAST:event_customerNameTFActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        if(currentUser.getRole()==ADMIN_ROLE){
+            new HomeScreenForAdmin(currentUser).setVisible(true);
+            dispose();
+        }else if(currentUser.getRole()==MANAGER_ROLE){
+            new HomeScreenForManager(currentUser).setVisible(true);
+            dispose();    
+        }
+    }//GEN-LAST:event_backButtonActionPerformed
 
+    private void addToCArtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCArtButtonActionPerformed
+        String customerName=customerNameTF.getText();
+        String customerPhoneNumber=contactTF.getText();
+        String dishorderd=dishNameTF.getText();
+        int Quantity=Integer.parseInt(quantitySpinner.getValue().toString());
+        if(contactTF.getText().length()!=10){
+            JOptionPane.showMessageDialog(null, "Phone Number Invalid");
+            return;
+        }
+        if(customerName.isBlank() || customerPhoneNumber.isBlank() || dishorderd.isBlank() || quantitySpinner.getValue().toString().isBlank() || priceTF.getText().isBlank() ){   
+            JOptionPane.showMessageDialog(null, "Empty Fields");
+            return;
+        }
+        
+        
+        int price=Integer.parseInt(priceTF.getText());
+        
+        
+        
+        OrderModel order=new OrderModel();
+        order.setCustomerName(customerName);
+        order.setCustomerPhoneNumber(customerPhoneNumber);
+        order.setDishorderd(dishorderd);
+        order.setPrice(price);
+        order.setQuantity(Quantity);
+        boolean added=addOrder(order);
+        if(added){
+             JOptionPane.showMessageDialog(null, "Order Added");
+             new ReceiptScreen(order).setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Order Not Added");
+        }
+        
+        
+    }//GEN-LAST:event_addToCArtButtonActionPerformed
+
+    private void menuTabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTabelMousePressed
+        DefaultTableModel dtm = (DefaultTableModel) menuTabel.getModel();
+        int selectedRow = menuTabel.getSelectedRow();
+        
+        String dishID= (String) dtm.getValueAt(selectedRow, 0);
+        String dishName= (String) dtm.getValueAt(selectedRow, 1);
+        String dishCategory= (String) dtm.getValueAt(selectedRow, 2);
+        String dishPrice =(String)dtm.getValueAt(selectedRow, 3);
+        
+        selectedDish.setID(Integer.parseInt(dishID));
+        selectedDish.setName(dishName);
+        selectedDish.setPrice(Integer.parseInt(dishPrice));
+        selectedDish.setCategory(dishCategory);
+        
+        dishNameTF.setText(dishName);
+        
+        int quantity=Integer.parseInt(quantitySpinner.getValue().toString());
+        priceTF.setText(""+quantity*selectedDish.getPrice());
+        
+        
+    }//GEN-LAST:event_menuTabelMousePressed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        customerNameTF.setText("");
+        contactTF.setText("");
+        dishNameTF.setText("");
+        quantitySpinner.setValue(0);
+        priceTF.setText("0");
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void quantitySpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_quantitySpinnerStateChanged
+        if(selectedDish!=null){
+            int quantity=Integer.parseInt(quantitySpinner.getValue().toString());
+            priceTF.setText(""+quantity*selectedDish.getPrice());
+        }
+    }//GEN-LAST:event_quantitySpinnerStateChanged
+
+    private void updateDishesTable(){
+        final String statement = "SELECT * from dishes";
+        try {
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            final String[] headerName = {"ID","Name", "Category","Price"};
+            DefaultTableModel model = new DefaultTableModel(null, headerName){  
+                @Override
+                public boolean isCellEditable(int row,int column){
+                 return false;   
+                }
+            };
+            menuTabel.setModel(model);
+            Object[] row = new Object[4];
+
+            while (resultSet.next()) {
+                row[0] = resultSet.getString("id");
+                row[1] = resultSet.getString("name");
+                row[2] = resultSet.getString("category");
+                row[3] = resultSet.getString("price");
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaceOrderScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addToCArtButton;
-    private javax.swing.JLabel billIDLabel1;
-    private javax.swing.JLabel billIdLAbel2;
+    private javax.swing.JButton backButton;
+    private javax.swing.JPanel backgroundPanell;
+    private javax.swing.JLabel cDRLabel;
     private javax.swing.JButton clearButton;
     private javax.swing.JLabel contactLabel;
     private javax.swing.JTextField contactTF;
+    private javax.swing.JLabel customerNameLabel;
     private javax.swing.JTextField customerNameTF;
     private javax.swing.JLabel dishNameLabel;
     private javax.swing.JTextField dishNameTF;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel iconLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane menuScrollPanel;
+    private javax.swing.JTable menuTabel;
     private javax.swing.JLabel placeOrderHeadingLabel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JTextField priceTF;
     private javax.swing.JLabel quantityLabel;
+    private javax.swing.JSpinner quantitySpinner;
     // End of variables declaration//GEN-END:variables
+
+    private boolean addOrder(OrderModel order) {
+            final String insertStatement = "INSERT INTO orders(customer_name, customer_phone_number, dish_ordered, quantity, price) values(?,?,?,?,?)";
+            try {
+                PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(insertStatement);
+                preparedStatement.setString(1, order.getCustomerName());
+                preparedStatement.setString(2, order.getCustomerPhoneNumber());
+                preparedStatement.setString(3, order.getDishorderd());
+                preparedStatement.setInt(4, order.getQuantity());
+                preparedStatement.setInt(5, order.getPrice());
+
+                final int isAdded = preparedStatement.executeUpdate();
+
+                if (isAdded > 0) {
+                    return true;
+                }
+            } catch (SQLException ex) {
+                System.out.println("error in " + PlaceOrderScreen.class.getName() + " = " + ex);
+            }
+        return false;
+    }
 }

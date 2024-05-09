@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= shariya yaseen
+Phone Number= 8089388701
+Dish Ordered= Hot Coffee
+Quantity = 3 
+
+Amount Paid= 60

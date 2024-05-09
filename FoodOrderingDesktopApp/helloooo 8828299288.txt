@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= helloooo
+Phone Number= 8828299288
+Dish Ordered= Veg Sandwich
+Quantity = 1 
+
+Amount Paid= 80

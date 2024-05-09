@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= shariya yaseen
+Phone Number= 6005815918
+Dish Ordered= Banana Shake
+Quantity = 25 
+
+Amount Paid= 1000

@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= simran
+Phone Number= 9622104410
+Dish Ordered= Chocolate MilkShake
+Quantity = 2 
+
+Amount Paid= 120

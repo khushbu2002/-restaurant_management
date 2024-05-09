@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= ,k,ilili
+Phone Number= 9622104410
+Dish Ordered= Veg Pizza
+Quantity = 1 
+
+Amount Paid= 120

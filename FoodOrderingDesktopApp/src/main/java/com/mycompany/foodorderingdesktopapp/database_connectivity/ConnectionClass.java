@@ -35,7 +35,7 @@ public class ConnectionClass {
                 
                 statement = "CREATE TABLE IF NOT EXISTS dishes(id INT NOT NULL AUTO_INCREMENT, "
                         + "name VARCHAR(255),"
-                        + "catagory VARCHAR(255), "
+                        + "category VARCHAR(255), "
                         + "price INT, "
                         + "PRIMARY KEY(id))";
                 preparedStatement = connection.prepareStatement(statement);
@@ -43,6 +43,16 @@ public class ConnectionClass {
                 
                 statement = "CREATE TABLE IF NOT EXISTS categories(id INT NOT NULL AUTO_INCREMENT, "
                         + "name VARCHAR(255),"
+                        + "PRIMARY KEY(id))";
+                preparedStatement = connection.prepareStatement(statement);
+                preparedStatement.execute();
+                
+                statement = "CREATE TABLE IF NOT EXISTS orders(id INT NOT NULL AUTO_INCREMENT, "
+                        + "customer_name VARCHAR(255),"
+                        + "customer_phone_number VARCHAR(255),"
+                        + "dish_ordered VARCHAR(255),"
+                        + "quantity INT,"
+                        + "price INT,"
                         + "PRIMARY KEY(id))";
                 preparedStatement = connection.prepareStatement(statement);
                 preparedStatement.execute();

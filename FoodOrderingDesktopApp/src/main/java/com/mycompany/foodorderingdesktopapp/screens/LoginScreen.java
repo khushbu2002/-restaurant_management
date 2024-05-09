@@ -30,7 +30,9 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
      */
     public LoginScreen() {
         initComponents();
-        
+        if(numOfAdmin()>=2){
+            logiPanel.remove(signInButton);
+        }
     }
 
     /**
@@ -43,35 +45,54 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
     private void initComponents() {
 
         loginPanel = new javax.swing.JPanel();
+        blurPanel = new javax.swing.JPanel();
+        logiPanel = new javax.swing.JPanel();
         loginTitleLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        signInButton = new javax.swing.JButton();
         usernameTF = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         exitButton = new javax.swing.JButton();
+        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 450));
         setMinimumSize(new java.awt.Dimension(800, 450));
+        setPreferredSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(null);
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setMaximumSize(new java.awt.Dimension(800, 450));
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loginTitleLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
-        loginTitleLabel.setText("Login");
-        loginPanel.add(loginTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 60, -1));
+        blurPanel.setBackground(new java.awt.Color(0, 0, 0, 80));
+        blurPanel.setMaximumSize(new java.awt.Dimension(800, 450));
+        blurPanel.setMinimumSize(new java.awt.Dimension(800, 450));
+        blurPanel.setPreferredSize(new java.awt.Dimension(800, 450));
+        blurPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        logiPanel.setBackground(new java.awt.Color(153, 0, 0));
+        logiPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        loginTitleLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 24)); // NOI18N
+        loginTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loginTitleLabel.setText("Login");
+        logiPanel.add(loginTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 80, 30));
+
+        usernameLabel.setBackground(new java.awt.Color(255, 255, 255));
         usernameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
         usernameLabel.setText("Username");
-        loginPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 146, 80, -1));
+        logiPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, 30));
 
         passwordLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
         passwordLabel.setText("Password");
-        loginPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 245, 80, -1));
+        logiPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 80, 30));
 
-        loginButton.setBackground(new java.awt.Color(255, 255, 0));
+        loginButton.setBackground(new java.awt.Color(204, 102, 0));
         loginButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,21 +100,23 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
                 loginButtonActionPerformed(evt);
             }
         });
-        loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 318, 97, -1));
+        logiPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 97, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 0));
-        jButton2.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
-        jButton2.setText("SignIn");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        signInButton.setBackground(new java.awt.Color(204, 102, 0));
+        signInButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        signInButton.setText("SignIn");
+        signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                signInButtonActionPerformed(evt);
             }
         });
-        loginPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(507, 318, 100, -1));
-        loginPanel.add(usernameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 271, 30));
-        loginPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 238, 271, 32));
+        logiPanel.add(signInButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 100, -1));
+        logiPanel.add(usernameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 260, 30));
+        logiPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 260, 32));
 
-        exitButton.setBackground(new java.awt.Color(255, 255, 0));
+        blurPanel.add(logiPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 450, 330));
+
+        exitButton.setBackground(new java.awt.Color(204, 102, 0));
         exitButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +124,13 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
                 exitButtonActionPerformed(evt);
             }
         });
-        loginPanel.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 100, -1));
+        blurPanel.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 100, -1));
+
+        loginPanel.add(blurPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+
+        iconLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\foodapp82.jpg")); // NOI18N
+        iconLabel.setText("jLabel1");
+        loginPanel.add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         getContentPane().add(loginPanel);
         loginPanel.setBounds(0, 0, 800, 450);
@@ -128,14 +157,12 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-                while (resultSet.next()) {
-                    System.out.println("in result set next while");
+                while (resultSet.next()) { 
                     UserModel userModel = new UserModel();
                     userModel.setId(Integer.parseInt(resultSet.getString("id")));
                     userModel.setUsername(resultSet.getString("username"));
                     userModel.setPassword(resultSet.getString("password"));
                     userModel.setRole(resultSet.getInt("role"));
-                    System.out.println("in result set next role " + userModel.getRole());
                     loginUser=userModel;
                     
                     switch (userModel.getRole()) {
@@ -162,24 +189,44 @@ public class LoginScreen extends javax.swing.JFrame implements Values{
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         new SignInScreen().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_signInButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
-
+    
+    private int numOfAdmin() {
+        int count=0;
+        
+        final String statement = "SELECT * from users where role=?";
+        try {
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+            preparedStatement.setInt(1, ADMIN_ROLE);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                count++;
+            }
+            System.out.print(count);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel blurPanel;
     private javax.swing.JButton exitButton;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel iconLabel;
+    private javax.swing.JPanel logiPanel;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel loginTitleLabel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JButton signInButton;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTF;
     // End of variables declaration//GEN-END:variables

@@ -28,6 +28,8 @@ public class ManagerList extends javax.swing.JFrame implements Values{
      */
     public ManagerList(UserModel user) {
         initComponents();
+        updateManagerTable();
+        addDeleteUpdateTabbedPanel.setSelectedComponent(addManagerPanel);
         currentUser=user;
     }
 
@@ -78,45 +80,33 @@ public class ManagerList extends javax.swing.JFrame implements Values{
         backgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
         backgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        managerPageLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        managerPageLabel.setText("Manager Page");
+        headingLabel.setBackground(new java.awt.Color(153, 0, 0));
+        headingLabel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        managerPageLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 24)); // NOI18N
+        managerPageLabel.setForeground(new java.awt.Color(255, 255, 255));
+        managerPageLabel.setText("Manager Page");
+        headingLabel.add(managerPageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 35, -1, -1));
+
+        backButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         backButton.setText("BACK");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout headingLabelLayout = new javax.swing.GroupLayout(headingLabel);
-        headingLabel.setLayout(headingLabelLayout);
-        headingLabelLayout.setHorizontalGroup(
-            headingLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headingLabelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(managerPageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 540, Short.MAX_VALUE)
-                .addComponent(backButton))
-        );
-        headingLabelLayout.setVerticalGroup(
-            headingLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headingLabelLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(managerPageLabel)
-                .addGap(16, 16, 16))
-            .addGroup(headingLabelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(backButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        headingLabel.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 23, -1, -1));
 
         backgroundPanel.add(headingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 800, 80));
 
         addDeleteUpdateTabbedPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addDeleteUpdateTabbedPanel.setPreferredSize(new java.awt.Dimension(314, 185));
 
+        deleteManagerPanel.setBackground(new java.awt.Color(153, 0, 0));
         deleteManagerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        deleteManagerUserNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        deleteManagerUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         deleteManagerUserNameLabel.setText("Username");
         deleteManagerPanel.add(deleteManagerUserNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 60, -1));
 
@@ -127,6 +117,7 @@ public class ManagerList extends javax.swing.JFrame implements Values{
         });
         deleteManagerPanel.add(deleteManagerUserNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 200, -1));
 
+        deleteManagerButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         deleteManagerButton.setText("REMOVE");
         deleteManagerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,29 +126,37 @@ public class ManagerList extends javax.swing.JFrame implements Values{
         });
         deleteManagerPanel.add(deleteManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
+        passwordLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
         passwordLabel.setText("Password");
         deleteManagerPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, -1));
         deleteManagerPanel.add(passwordTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 200, -1));
 
         addDeleteUpdateTabbedPanel.addTab("RM", deleteManagerPanel);
 
+        updateManagerPanel.setBackground(new java.awt.Color(153, 0, 0));
         updateManagerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        updateManagerLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateManagerLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateManagerLabel.setText("Username");
         updateManagerPanel.add(updateManagerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, -1));
 
+        updateNewPasswordLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateNewPasswordLabel.setText("New Password");
-        updateManagerPanel.add(updateNewPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 80, -1));
+        updateManagerPanel.add(updateNewPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 90, -1));
         updateManagerPanel.add(updateUserNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 190, -1));
         updateManagerPanel.add(updateNewPasswordTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 190, -1));
 
+        updateUserNameButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         updateUserNameButton.setText("UPDATE");
         updateUserNameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateUserNameButtonActionPerformed(evt);
             }
         });
-        updateManagerPanel.add(updateUserNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
+        updateManagerPanel.add(updateUserNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         updateNewUserNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,16 +165,23 @@ public class ManagerList extends javax.swing.JFrame implements Values{
         });
         updateManagerPanel.add(updateNewUserNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 190, -1));
 
+        updateNewManagerNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewManagerNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateNewManagerNameLabel.setText("New Username");
-        updateManagerPanel.add(updateNewManagerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 80, 20));
+        updateManagerPanel.add(updateNewManagerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, 20));
 
         addDeleteUpdateTabbedPanel.addTab("UM", updateManagerPanel);
 
+        addManagerPanel.setBackground(new java.awt.Color(153, 0, 0));
         addManagerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        addDishNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        addDishNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         addDishNameLabel.setText("Username");
         addManagerPanel.add(addDishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
+        addpassLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        addpassLabel.setForeground(new java.awt.Color(255, 255, 255));
         addpassLabel.setText("Password");
         addManagerPanel.add(addpassLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
@@ -193,6 +199,7 @@ public class ManagerList extends javax.swing.JFrame implements Values{
         });
         addManagerPanel.add(addPasswordTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
 
+        addManagerButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         addManagerButton.setText("ADD");
         addManagerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,8 +212,10 @@ public class ManagerList extends javax.swing.JFrame implements Values{
 
         backgroundPanel.add(addDeleteUpdateTabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 640, 180));
 
+        addDeleteUpdateManagerButtonPanel.setBackground(new java.awt.Color(153, 0, 0));
         addDeleteUpdateManagerButtonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        addManagerPanelButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         addManagerPanelButton.setText("Add Manager");
         addManagerPanelButton.setPreferredSize(new java.awt.Dimension(123, 22));
         addManagerPanelButton.setVerifyInputWhenFocusTarget(false);
@@ -215,16 +224,18 @@ public class ManagerList extends javax.swing.JFrame implements Values{
                 addManagerPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateManagerButtonPanel.add(addManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 123, 22));
+        addDeleteUpdateManagerButtonPanel.add(addManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 70, 130, 22));
 
+        deleteManagerPanelButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         deleteManagerPanelButton.setText("Delete Manager");
         deleteManagerPanelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteManagerPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateManagerButtonPanel.add(deleteManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 123, 22));
+        addDeleteUpdateManagerButtonPanel.add(deleteManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 110, 130, 22));
 
+        updateManagerPanelButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         updateManagerPanelButton.setText("Update Manager");
         updateManagerPanelButton.setPreferredSize(new java.awt.Dimension(123, 22));
         updateManagerPanelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +243,11 @@ public class ManagerList extends javax.swing.JFrame implements Values{
                 updateManagerPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateManagerButtonPanel.add(updateManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 123, 22));
+        addDeleteUpdateManagerButtonPanel.add(updateManagerPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 130, 22));
 
-        backgroundPanel.add(addDeleteUpdateManagerButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 160, 190));
+        backgroundPanel.add(addDeleteUpdateManagerButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 200));
 
+        managerTable.setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
         managerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -301,6 +313,8 @@ public class ManagerList extends javax.swing.JFrame implements Values{
 
         if(managerDeleted){
             updateManagerTable();
+            deleteManagerUserNameTF.setText("");
+            passwordTF.setText("");
             JOptionPane.showMessageDialog(null, "Manager deleted");
         }else{
             JOptionPane.showMessageDialog(null, "Manager not deleted");

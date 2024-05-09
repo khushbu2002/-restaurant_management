@@ -29,54 +29,101 @@ public class HomeScreenForManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        backgroundPanel = new javax.swing.JPanel();
         menuButton = new javax.swing.JButton();
         placeOrderButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
         categoryButton = new javax.swing.JButton();
+        blurPanel = new javax.swing.JPanel();
+        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 450));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        backgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
+        backgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        menuButton.setBackground(new java.awt.Color(204, 102, 0));
+        menuButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         menuButton.setText("Menu");
-        jPanel1.add(menuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 173, -1, -1));
+        menuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanel.add(menuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 120, 40));
 
-        placeOrderButton.setText("PlaceOrder");
-        jPanel1.add(placeOrderButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 173, -1, -1));
+        placeOrderButton.setBackground(new java.awt.Color(204, 102, 0));
+        placeOrderButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
+        placeOrderButton.setText("Place Order");
+        placeOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                placeOrderButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanel.add(placeOrderButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 120, 40));
 
-        logoutButton.setText("LOGOUT");
-        jPanel1.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 369, -1, -1));
+        logoutButton.setBackground(new java.awt.Color(204, 102, 0));
+        logoutButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanel.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 100, 30));
 
-        exitButton.setText("Exit");
-        jPanel1.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(576, 357, -1, -1));
-
+        categoryButton.setBackground(new java.awt.Color(204, 102, 0));
+        categoryButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         categoryButton.setText("Category");
-        jPanel1.add(categoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
+        categoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryButtonActionPerformed(evt);
+            }
+        });
+        backgroundPanel.add(categoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 120, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        blurPanel.setBackground(new java.awt.Color(0, 0, 0 , 80));
+        blurPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        backgroundPanel.add(blurPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+
+        iconLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\foodapp82.jpg")); // NOI18N
+        iconLabel.setText("jLabel1");
+        backgroundPanel.add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+
+        getContentPane().add(backgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
+        new PlaceOrderScreen(currentUser).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_placeOrderButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        new LoginScreen().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
+        new UpdateMenu(currentUser).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuButtonActionPerformed
+
+    private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
+        new CategoryScreen(currentUser).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_categoryButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel backgroundPanel;
+    private javax.swing.JPanel blurPanel;
     private javax.swing.JButton categoryButton;
-    private javax.swing.JButton exitButton;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel iconLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton menuButton;
     private javax.swing.JButton placeOrderButton;

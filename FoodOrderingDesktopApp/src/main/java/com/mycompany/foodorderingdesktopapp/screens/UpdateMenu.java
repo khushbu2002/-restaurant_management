@@ -5,7 +5,6 @@
 package com.mycompany.foodorderingdesktopapp.screens;
 
 import Interfaces.Values;
-import static Interfaces.Values.UPDATE_SUCCESSFUL;
 import com.mycompany.foodorderingdesktopapp.database_connectivity.ConnectionClass;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +12,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import models.UserModel;
+import javax.swing.table.DefaultTableModel;
+import models.*;
 
 /**
  *
@@ -26,9 +26,12 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
     /**
      * Creates new form UpdateMenu
      */
-    public UpdateMenu(UserModel user) {
+    public UpdateMenu(UserModel currentUser) {
         initComponents();
-        currentUser=user;
+        this.currentUser=currentUser;
+        fillComboBox(addCategoryComboBox);
+        addDeleteUpdateTabbedPanel.setSelectedComponent(addMenuDishButton);   
+        updateDishesTable();
     }
 
     /**
@@ -45,20 +48,27 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         menuPageLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         addDeleteUpdateTabbedPanel = new javax.swing.JTabbedPane();
+        updateMenuPanel = new javax.swing.JPanel();
+        updateDishNameButton = new javax.swing.JLabel();
+        updateNewCategoryLabel = new javax.swing.JLabel();
+        updateDishNameTF = new javax.swing.JTextField();
+        updateNewDishNameButton = new javax.swing.JButton();
+        updateNewNameTF = new javax.swing.JTextField();
+        updateNewDishNameLabel = new javax.swing.JLabel();
+        updateNewCategoryComboBox = new javax.swing.JComboBox<>();
+        updateCategoryComboBox = new javax.swing.JComboBox<>();
+        updateCategoryLabel = new javax.swing.JLabel();
+        updateNewPriceTF = new javax.swing.JTextField();
+        updateNewNameLabel = new javax.swing.JLabel();
         addMenuDishButton = new javax.swing.JPanel();
         addDishNameLabel = new javax.swing.JLabel();
         addCategoryLabel = new javax.swing.JLabel();
         addDishNameTF = new javax.swing.JTextField();
         addNewDishButton = new javax.swing.JButton();
         addCategoryComboBox = new javax.swing.JComboBox<>();
-        updateMenuPanel = new javax.swing.JPanel();
-        updateDishNameButton = new javax.swing.JLabel();
-        updateCategoryLabel = new javax.swing.JLabel();
-        updateDishNameTF = new javax.swing.JTextField();
-        updateNewDishNameButton = new javax.swing.JButton();
-        updateNewNameTF = new javax.swing.JTextField();
-        updateNewDishNameLabel = new javax.swing.JLabel();
-        updateCategoryComboBox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        addDishPriceTF = new javax.swing.JTextField();
+        addDishPriceLabel = new javax.swing.JLabel();
         deleteDishPanel = new javax.swing.JPanel();
         deleteDishLabel = new javax.swing.JLabel();
         deleteDishNameTF = new javax.swing.JTextField();
@@ -73,6 +83,7 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         menuTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 450));
         setMinimumSize(new java.awt.Dimension(800, 450));
 
         backgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,12 +91,16 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         backgroundPanel.setPreferredSize(new java.awt.Dimension(800, 450));
         backgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        headingLabel.setBackground(new java.awt.Color(153, 0, 0));
         headingLabel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        menuPageLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        menuPageLabel.setBackground(new java.awt.Color(255, 255, 255));
+        menuPageLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 24)); // NOI18N
+        menuPageLabel.setForeground(new java.awt.Color(255, 255, 255));
         menuPageLabel.setText("Menu Page");
         headingLabel.add(menuPageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 32, -1, -1));
 
+        backButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         backButton.setText("BACK");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,50 +114,28 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         addDeleteUpdateTabbedPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addDeleteUpdateTabbedPanel.setPreferredSize(new java.awt.Dimension(314, 185));
 
-        addMenuDishButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        addDishNameLabel.setText("Dish Name");
-        addMenuDishButton.add(addDishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        addCategoryLabel.setText("Category");
-        addMenuDishButton.add(addCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        addDishNameTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDishNameTFActionPerformed(evt);
-            }
-        });
-        addMenuDishButton.add(addDishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 200, -1));
-
-        addNewDishButton.setText("ADD");
-        addNewDishButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addNewDishButtonActionPerformed(evt);
-            }
-        });
-        addMenuDishButton.add(addNewDishButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
-
-        addCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        addMenuDishButton.add(addCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
-
-        addDeleteUpdateTabbedPanel.addTab("AM", addMenuDishButton);
-
+        updateMenuPanel.setBackground(new java.awt.Color(153, 0, 0));
         updateMenuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        updateDishNameButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateDishNameButton.setForeground(new java.awt.Color(255, 255, 255));
         updateDishNameButton.setText("Dish Name");
         updateMenuPanel.add(updateDishNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        updateCategoryLabel.setText("Category");
-        updateMenuPanel.add(updateCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 60, -1));
+        updateNewCategoryLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        updateNewCategoryLabel.setText("New Category");
+        updateMenuPanel.add(updateNewCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 90, -1));
         updateMenuPanel.add(updateDishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 190, -1));
 
+        updateNewDishNameButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         updateNewDishNameButton.setText("UPDATE");
         updateNewDishNameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateNewDishNameButtonActionPerformed(evt);
             }
         });
-        updateMenuPanel.add(updateNewDishNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
+        updateMenuPanel.add(updateNewDishNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
 
         updateNewNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,26 +144,93 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         });
         updateMenuPanel.add(updateNewNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 190, -1));
 
+        updateNewDishNameLabel.setBackground(new java.awt.Color(255, 255, 255));
+        updateNewDishNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewDishNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateNewDishNameLabel.setText("New Name");
         updateMenuPanel.add(updateNewDishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 70, 20));
 
-        updateCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        updateMenuPanel.add(updateCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 190, -1));
+        updateMenuPanel.add(updateNewCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 190, -1));
+
+        updateMenuPanel.add(updateCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 190, -1));
+
+        updateCategoryLabel.setBackground(new java.awt.Color(255, 255, 255));
+        updateCategoryLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        updateCategoryLabel.setText("Category");
+        updateMenuPanel.add(updateCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 60, -1));
+        updateMenuPanel.add(updateNewPriceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 190, -1));
+
+        updateNewNameLabel.setBackground(new java.awt.Color(255, 255, 255));
+        updateNewNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        updateNewNameLabel.setText("New Price");
+        updateMenuPanel.add(updateNewNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 60, -1));
 
         addDeleteUpdateTabbedPanel.addTab("UM", updateMenuPanel);
 
+        addMenuDishButton.setBackground(new java.awt.Color(153, 0, 0));
+        addMenuDishButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addDishNameLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
+        addDishNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        addDishNameLabel.setText("Dish Name");
+        addMenuDishButton.add(addDishNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 70, -1));
+
+        addCategoryLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        addCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        addCategoryLabel.setText("Category");
+        addMenuDishButton.add(addCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 60, -1));
+
+        addDishNameTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDishNameTFActionPerformed(evt);
+            }
+        });
+        addMenuDishButton.add(addDishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 200, -1));
+
+        addNewDishButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
+        addNewDishButton.setText("ADD");
+        addNewDishButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewDishButtonActionPerformed(evt);
+            }
+        });
+        addMenuDishButton.add(addNewDishButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+
+        addMenuDishButton.add(addCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
+
+        jLabel1.setText("jLabel1");
+        jLabel1.setMaximumSize(new java.awt.Dimension(800, 450));
+        jLabel1.setMinimumSize(new java.awt.Dimension(800, 450));
+        jLabel1.setPreferredSize(new java.awt.Dimension(800, 450));
+        addMenuDishButton.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 250, 1060, 200));
+        addMenuDishButton.add(addDishPriceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 140, -1));
+
+        addDishPriceLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        addDishPriceLabel.setForeground(new java.awt.Color(255, 255, 255));
+        addDishPriceLabel.setText("Price");
+        addMenuDishButton.add(addDishPriceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 40, 20));
+
+        addDeleteUpdateTabbedPanel.addTab("AM", addMenuDishButton);
+
+        deleteDishPanel.setBackground(new java.awt.Color(153, 0, 0));
+        deleteDishPanel.setForeground(new java.awt.Color(255, 255, 255));
         deleteDishPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        deleteDishLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        deleteDishLabel.setForeground(new java.awt.Color(255, 255, 255));
         deleteDishLabel.setText("Dish Name");
-        deleteDishPanel.add(deleteDishLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        deleteDishPanel.add(deleteDishLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         deleteDishNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteDishNameTFActionPerformed(evt);
             }
         });
-        deleteDishPanel.add(deleteDishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 200, -1));
+        deleteDishPanel.add(deleteDishNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 200, -1));
 
+        deleteDishfromMenuButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         deleteDishfromMenuButton.setText("REMOVE");
         deleteDishfromMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,18 +239,21 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         });
         deleteDishPanel.add(deleteDishfromMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
+        categoryButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        categoryButton.setForeground(new java.awt.Color(255, 255, 255));
         categoryButton.setText("Category");
-        deleteDishPanel.add(categoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 50, -1));
+        deleteDishPanel.add(categoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, -1));
 
-        removeCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         deleteDishPanel.add(removeCategoryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 200, -1));
 
         addDeleteUpdateTabbedPanel.addTab("RM", deleteDishPanel);
 
         backgroundPanel.add(addDeleteUpdateTabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 640, 180));
 
+        addDeleteUpdateDishButtonPanel.setBackground(new java.awt.Color(153, 0, 0));
         addDeleteUpdateDishButtonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        addDishButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         addDishButton.setText("Add Dish");
         addDishButton.setPreferredSize(new java.awt.Dimension(123, 22));
         addDishButton.setVerifyInputWhenFocusTarget(false);
@@ -201,6 +264,7 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         });
         addDeleteUpdateDishButtonPanel.add(addDishButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 123, 22));
 
+        deleteDishButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         deleteDishButton.setText("Delete Dish");
         deleteDishButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +273,7 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         });
         addDeleteUpdateDishButtonPanel.add(deleteDishButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 123, 22));
 
+        updateDishButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         updateDishButton.setText("Update Dish");
         updateDishButton.setPreferredSize(new java.awt.Dimension(123, 22));
         updateDishButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +285,7 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
 
         backgroundPanel.add(addDeleteUpdateDishButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 160, 190));
 
+        menuTable.setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -239,16 +305,14 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(backgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(backgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(backgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        backgroundPanel.getAccessibleContext().setAccessibleName("");
 
         pack();
         setLocationRelativeTo(null);
@@ -270,124 +334,289 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
 
     private void addNewDishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewDishButtonActionPerformed
 
-        String username = addDishNameTF.getText();
-        String password = .getText();
-        int role=MANAGER_ROLE;
-
-        if (username.isBlank()) {
-            JOptionPane.showMessageDialog(null, "username is blank");
+        String name = addDishNameTF.getText();
+        
+        if (name.isBlank()) {
+            JOptionPane.showMessageDialog(null, "name is blank");
             return;
         }
-        if (password.isBlank()) {
-            JOptionPane.showMessageDialog(null, "password is blank");
+        if (addCategoryComboBox.getSelectedItem()==null) {
+            JOptionPane.showMessageDialog(null, "category not selected");
             return;
         }
-
-        int answer = addUser(username,password,role);
+        String categoryName = addCategoryComboBox.getSelectedItem().toString();
+        
+        if (addDishPriceTF.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "price is blank");
+            return;
+        }
+        
+        int price=Integer.parseInt(addDishPriceTF.getText());
+        
+        int answer = addDish(name,categoryName,price);
         if(answer==USERNAME_ALREAD_IN_USE){
-            JOptionPane.showMessageDialog(null, "username used");
+            JOptionPane.showMessageDialog(null, "dish name used");
             return;
         }
         if(answer==USER_ADDED){
-            JOptionPane.showMessageDialog(null, "Manager added");
+            JOptionPane.showMessageDialog(null, "Dish added");
             addDishNameTF.setText("");
-            addCategoryTF.setText("");
-            updateManagerTable();
+            updateDishesTable();
             return;
         }
 
         if(answer==USER_NOT_ADDED){
-            JOptionPane.showMessageDialog(null, "No manager added");
+            JOptionPane.showMessageDialog(null, "No Dish added");
             addDishNameTF.setText("");
-            addCategoryTF.setText("");
         }
     }//GEN-LAST:event_addNewDishButtonActionPerformed
+    
+    private int addDish(String name,String categoryName,int price){
 
-    private void deleteDishNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDishNameTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteDishNameTFActionPerformed
+        final String searchStatement = "SELECT * from dishes where name=? and category=?";
+            
+            try {
+                PreparedStatement searchPreparedStatement = ConnectionClass.getInstance().connection.prepareStatement(searchStatement);
+                searchPreparedStatement.setString(1, name);
+                searchPreparedStatement.setString(2, categoryName);
+                
+                ResultSet searhResultSet = searchPreparedStatement.executeQuery();
+                
+                while (searhResultSet.next()) {
+                    return USERNAME_ALREAD_IN_USE;
+                }
+                
+                final String insertStatement = "INSERT INTO dishes(name, category,price) values(?,?,?)";
+                PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(insertStatement);
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, categoryName);
+                preparedStatement.setInt(3, price);
 
-    private void deleteDishfromMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDishfromMenuButtonActionPerformed
+                final int isAdded = preparedStatement.executeUpdate();
 
-        String username =deleteDishNameTF.getText();
-        UserModel user=userExist(username);
-        if(user==null){
-            JOptionPane.showMessageDialog(null, "No such manager exist");
-            return;
+                if (isAdded > 0) {
+                    return USER_ADDED;
+                }
+            } catch (SQLException ex) {
+                System.out.println("error in " + UpdateMenu.class.getName() + " = " + ex);
+            }
+        return USER_NOT_ADDED;
+    }
+    
+    private DishModel dishExist(String name,String category) {
+        try {
+            final String searchStatement = "SELECT * from dishes where name=? and category=?";
+            PreparedStatement searchPreparedStatement = ConnectionClass.getInstance().connection.prepareStatement(searchStatement);
+            searchPreparedStatement.setString(1, name);
+            searchPreparedStatement.setString(2, category);
+            ResultSet searhResultSet = searchPreparedStatement.executeQuery();
+
+            while (searhResultSet.next()) {
+                DishModel dish=new DishModel();
+                dish.setName(name);
+                dish.setCategory(category);
+                dish.setID(Integer.parseInt(searhResultSet.getString("id")));
+                dish.setPrice(searhResultSet.getInt("price"));
+                return dish;
+            }
+        } catch (SQLException ex) {
+                System.out.println("error in " + UpdateMenu.class.getName() + " = " + ex);
         }
-        int userRole=user.getRole();
-        if(userRole!=MANAGER_ROLE){
-            JOptionPane.showMessageDialog(null, "No such manager exist");
+        return null;
+    }
+    
+    private void updateDishesTable(){
+        final String statement = "SELECT * from dishes";
+        try {
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            final String[] headerName = {"ID","Name", "Category","Price"};
+            DefaultTableModel model = new DefaultTableModel(null, headerName){  
+                @Override
+                public boolean isCellEditable(int row,int column){
+                 return false;   
+                }
+            };
+            menuTable.setModel(model);
+            Object[] row = new Object[4];
+
+            while (resultSet.next()) {
+                row[0] = resultSet.getString("id");
+                row[1] = resultSet.getString("name");
+                row[2] = resultSet.getString("category");
+                row[3] = resultSet.getInt("price");
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        boolean managerDeleted=deleteUser(user.getUsername());
-
-        if(managerDeleted){
-            updateManagerTable();
-            JOptionPane.showMessageDialog(null, "Manager deleted");
-        }else{
-            JOptionPane.showMessageDialog(null, "Manager not deleted");
+    }
+        
+    private boolean deleteDish(String name,String category){
+        
+        final String statement = "delete from dishes where `name`=? and `category`=?";
+        try {
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, category);
+            
+            int f=preparedStatement.executeUpdate();
+            
+            // f>0 means account deleted, f<=0 means not deleted
+            return f>0;
+        } catch (SQLException ex) {
+                System.out.println("error in " + UpdateMenu.class.getName() + " = " + ex);
         }
-    }//GEN-LAST:event_deleteDishfromMenuButtonActionPerformed
-
+        return false;
+    }
+    
     private void updateNewDishNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateNewDishNameButtonActionPerformed
-
-        String username = updateDishNameTF.getText();
-        UserModel user=userExist(username);
-        if(user==null){
-            JOptionPane.showMessageDialog(null, "No Such User Exist");
+        
+        if (updateDishNameTF.getText().isBlank() || updateNewNameTF.getText().isBlank() || updateNewPriceTF.getText().isBlank() ) {
+            JOptionPane.showMessageDialog(null, "Empty text feilds");
             return;
         }
-        UserModel newUser=user;
-
-        String newUsername = updateNewNameTF.getText();
-        String newPassword = updateCategoryTF.getText();
-        newUser.setUsername(newUsername);
-        newUser.setPassword(newPassword);
-        if (newUsername.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Enter email");
+        
+        if (updateNewCategoryComboBox.getSelectedItem()==null || updateCategoryComboBox.getSelectedItem()==null) {
+            JOptionPane.showMessageDialog(null, "Select Category");
             return;
         }
-        if (newPassword.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Enter password");
+        
+        String name = updateDishNameTF.getText();
+        String category = updateCategoryComboBox.getSelectedItem().toString();
+        int price =Integer.parseInt(updateNewPriceTF.getText());
+        
+        DishModel dish=dishExist(name,category);
+        if(dish==null){
+            JOptionPane.showMessageDialog(null, "No Such Dish Exist");
             return;
         }
-        int userUpdate=updateUser(newUser);
+        DishModel newDish=dish;
 
-        switch (userUpdate) {
+        String newName = updateNewNameTF.getText();
+        String newCategory = updateNewCategoryComboBox.getSelectedItem().toString();
+        newDish.setName(newName);
+        newDish.setCategory(newCategory);
+        newDish.setPrice(price);
+        
+        int dishUpdate=updateDish(newDish);
+
+        switch (dishUpdate) {
             case USERNAME_ALREAD_IN_USE:
-            break;
+                JOptionPane.showMessageDialog(null, "Dish already in table");
+                break;
             case UPDATE_SUCCESSFUL:
-            updateManagerTable();
-            break;
+                updateDishesTable();
+                JOptionPane.showMessageDialog(null, "Values Updates");
+                break;
             case UPDATE_UNSUCCESSFUL:
-
-            break;
+                JOptionPane.showMessageDialog(null, "Values Not Updates");
+                break;
             default:
-            break;
+                break;
         }
     }//GEN-LAST:event_updateNewDishNameButtonActionPerformed
+    
+    private int updateDish(DishModel dish){
+        String newName=dish.getName();
+        String newCategory=dish.getCategory();
+        
+        final String searchStatement = "SELECT * from dishes where name=? and category=?";
+        try {
+            PreparedStatement searchPreparedStatement = ConnectionClass.getInstance().connection.prepareStatement(searchStatement);
+            searchPreparedStatement.setString(1, newName);
+            searchPreparedStatement.setString(2, newCategory);
 
+            ResultSet searhResultSet = searchPreparedStatement.executeQuery();
+
+            while (searhResultSet.next()) {                
+                return USERNAME_ALREAD_IN_USE;
+            }
+            
+            final String insertStatement = "update dishes set `name`=?, `category`=? , `price`=? where `id`=?";
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(insertStatement);
+            preparedStatement.setString(1, newName);
+            preparedStatement.setString(2, newCategory);
+            preparedStatement.setInt(3, dish.getPrice());
+            preparedStatement.setString(4, Integer.toString(dish.getID()));
+
+            final int isAdded = preparedStatement.executeUpdate();
+
+            if (isAdded > 0) {
+                return UPDATE_SUCCESSFUL;
+            } 
+        } catch (SQLException ex) {
+            System.out.println("error in " + UpdateMenu.class.getName() + " = " + ex);
+        }    
+        
+        return UPDATE_UNSUCCESSFUL;
+    }
+    
     private void updateNewNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateNewNameTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateNewNameTFActionPerformed
 
     private void addDishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDishButtonActionPerformed
-        addDeleteUpdateTabbedPanel.setSelectedComponent(addMenuDishButton);
         fillComboBox(addCategoryComboBox);
-        
+        addDeleteUpdateTabbedPanel.setSelectedComponent(addMenuDishButton);     
     }//GEN-LAST:event_addDishButtonActionPerformed
 
     private void deleteDishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDishButtonActionPerformed
-        addDeleteUpdateTabbedPanel.setSelectedComponent(deleteDishPanel);
         fillComboBox(removeCategoryComboBox);
+        addDeleteUpdateTabbedPanel.setSelectedComponent(deleteDishPanel);   
     }//GEN-LAST:event_deleteDishButtonActionPerformed
 
     private void updateDishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDishButtonActionPerformed
-        addDeleteUpdateTabbedPanel.setSelectedComponent(updateMenuPanel);
+        fillComboBox(updateNewCategoryComboBox);
         fillComboBox(updateCategoryComboBox);
+        addDeleteUpdateTabbedPanel.setSelectedComponent(updateMenuPanel);
     }//GEN-LAST:event_updateDishButtonActionPerformed
 
+    private void deleteDishfromMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDishfromMenuButtonActionPerformed
+
+        String name =deleteDishNameTF.getText();
+        if(name.isBlank()){
+            JOptionPane.showMessageDialog(null, "Empty Name");
+            return;
+        }
+        if(removeCategoryComboBox.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "Category not selected");
+            return;
+        }
+        String categoryName = removeCategoryComboBox.getSelectedItem().toString();
+        DishModel dish=dishExist(name,categoryName);
+        if(dish==null){
+            JOptionPane.showMessageDialog(null, "No such Dish exist");
+            return;
+        }
+        boolean managerDeleted=deleteDish(dish.getName(),dish.getCategory());
+        if(managerDeleted){
+            updateDishesTable();
+            JOptionPane.showMessageDialog(null, "Dish deleted");
+        }else{
+            JOptionPane.showMessageDialog(null, "Dish not deleted");
+        }
+    }//GEN-LAST:event_deleteDishfromMenuButtonActionPerformed
+
+    private void deleteDishNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDishNameTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteDishNameTFActionPerformed
+    
+    private void fillComboBox(javax.swing.JComboBox<String> CB) {
+        CB.removeAllItems();
+        final String statement = "SELECT * from categories";
+        try {
+            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String category = resultSet.getString("name");
+                CB.addItem(category);
+            }
+            //CB.;
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagerList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> addCategoryComboBox;
@@ -397,6 +626,8 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
     private javax.swing.JButton addDishButton;
     private javax.swing.JLabel addDishNameLabel;
     private javax.swing.JTextField addDishNameTF;
+    private javax.swing.JLabel addDishPriceLabel;
+    private javax.swing.JTextField addDishPriceTF;
     private javax.swing.JPanel addMenuDishButton;
     private javax.swing.JButton addNewDishButton;
     private javax.swing.JButton backButton;
@@ -408,6 +639,7 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
     private javax.swing.JPanel deleteDishPanel;
     private javax.swing.JButton deleteDishfromMenuButton;
     private javax.swing.JPanel headingLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel menuPageLabel;
     private javax.swing.JTable menuTable;
     private javax.swing.JScrollPane menuTableScrollPane;
@@ -418,22 +650,13 @@ public class UpdateMenu extends javax.swing.JFrame implements Values{
     private javax.swing.JLabel updateDishNameButton;
     private javax.swing.JTextField updateDishNameTF;
     private javax.swing.JPanel updateMenuPanel;
+    private javax.swing.JComboBox<String> updateNewCategoryComboBox;
+    private javax.swing.JLabel updateNewCategoryLabel;
     private javax.swing.JButton updateNewDishNameButton;
     private javax.swing.JLabel updateNewDishNameLabel;
+    private javax.swing.JLabel updateNewNameLabel;
     private javax.swing.JTextField updateNewNameTF;
+    private javax.swing.JTextField updateNewPriceTF;
     // End of variables declaration//GEN-END:variables
 
-    private void fillComboBox(javax.swing.JComboBox<String> CB) {
-        final String statement = "SELECT * from categories";
-        try {
-            PreparedStatement preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String category = resultSet.getString("name");
-                CB.addItem(category);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ManagerList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

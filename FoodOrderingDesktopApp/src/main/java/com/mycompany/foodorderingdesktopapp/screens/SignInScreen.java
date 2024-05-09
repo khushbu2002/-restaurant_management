@@ -37,72 +37,103 @@ public class SignInScreen extends javax.swing.JFrame implements Values {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        backgroundPanel = new javax.swing.JPanel();
+        singupPanel = new javax.swing.JPanel();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        signupButton = new javax.swing.JButton();
-        loginButtom = new javax.swing.JButton();
         usernameTF = new javax.swing.JTextField();
+        signupButton = new javax.swing.JButton();
         signUpLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        loginButtom = new javax.swing.JButton();
+        blurPanel = new javax.swing.JPanel();
+        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 450));
         setMinimumSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        backgroundPanel.setBackground(new java.awt.Color(0, 0, 0));
+        backgroundPanel.setForeground(new java.awt.Color(255, 255, 255));
+        backgroundPanel.setMaximumSize(new java.awt.Dimension(800, 450));
+        backgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        singupPanel.setBackground(new java.awt.Color(153, 0, 0));
+        singupPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usernameLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
         usernameLabel.setText("Username");
-        jPanel1.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 117, 90, -1));
+        singupPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 90, -1));
 
         passwordLabel.setBackground(new java.awt.Color(255, 255, 0));
         passwordLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
         passwordLabel.setText("Password");
-        jPanel1.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 179, 90, -1));
-
-        signupButton.setBackground(new java.awt.Color(255, 255, 0));
-        signupButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        signupButton.setText("Sign-up");
-        signupButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signupButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(signupButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
-
-        loginButtom.setBackground(new java.awt.Color(255, 255, 0));
-        loginButtom.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        loginButtom.setText("Back to Login");
-        loginButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtomActionPerformed(evt);
-            }
-        });
-        jPanel1.add(loginButtom, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 270, 141, -1));
+        singupPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, -1));
 
         usernameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameTFActionPerformed(evt);
             }
         });
-        jPanel1.add(usernameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 117, 280, -1));
+        singupPanel.add(usernameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 190, -1));
 
-        signUpLabel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        signUpLabel.setText("Sign-Up as Admin");
-        jPanel1.add(signUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 190, -1));
+        signupButton.setBackground(new java.awt.Color(204, 102, 0));
+        signupButton.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        signupButton.setText("Sign-up");
+        signupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupButtonActionPerformed(evt);
+            }
+        });
+        singupPanel.add(signupButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, -1));
+
+        signUpLabel.setBackground(new java.awt.Color(255, 255, 255));
+        signUpLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 18)); // NOI18N
+        signUpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        signUpLabel.setText("Sign Up for Admin");
+        singupPanel.add(signUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 190, -1));
 
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 280, -1));
+        singupPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 190, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+        loginButtom.setBackground(new java.awt.Color(204, 102, 0));
+        loginButtom.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        loginButtom.setText("Back to Login");
+        loginButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtomActionPerformed(evt);
+            }
+        });
+        singupPanel.add(loginButtom, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 141, -1));
+
+        backgroundPanel.add(singupPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 380, 300));
+
+        blurPanel.setBackground(new java.awt.Color(0, 0, 0 , 80));
+        blurPanel.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                blurPanelComponentAdded(evt);
+            }
+        });
+        blurPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        iconLabel.setBackground(new java.awt.Color(153, 0, 0));
+        iconLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\foodapp82.jpg")); // NOI18N
+        iconLabel.setText("jLabel1");
+        iconLabel.setMaximumSize(new java.awt.Dimension(800, 450));
+        iconLabel.setMinimumSize(new java.awt.Dimension(800, 450));
+        iconLabel.setPreferredSize(new java.awt.Dimension(800, 450));
+        blurPanel.add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 450));
+
+        backgroundPanel.add(blurPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+
+        getContentPane().add(backgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         pack();
         setLocationRelativeTo(null);
@@ -168,6 +199,10 @@ public class SignInScreen extends javax.swing.JFrame implements Values {
        
     }//GEN-LAST:event_usernameTFActionPerformed
 
+    private void blurPanelComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_blurPanelComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_blurPanelComponentAdded
+
     /**
      * @param args the command line arguments
      */
@@ -207,12 +242,15 @@ public class SignInScreen extends javax.swing.JFrame implements Values {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel backgroundPanel;
+    private javax.swing.JPanel blurPanel;
+    private javax.swing.JLabel iconLabel;
     private javax.swing.JButton loginButtom;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel signUpLabel;
     private javax.swing.JButton signupButton;
+    private javax.swing.JPanel singupPanel;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTF;
     // End of variables declaration//GEN-END:variables

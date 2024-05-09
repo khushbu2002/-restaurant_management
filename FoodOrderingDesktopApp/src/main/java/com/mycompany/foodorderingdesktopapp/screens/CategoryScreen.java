@@ -29,6 +29,7 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
     public CategoryScreen(UserModel category) {
         initComponents();
         updateCategoryTable();
+        addDeleteUpdateTabbedPanel.setSelectedComponent(addCategoryPanel);
         currentUser=category;
     }
 
@@ -69,12 +70,15 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        headingLabel.setBackground(new java.awt.Color(153, 0, 0));
         headingLabel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        categoryPageLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        categoryPageLabel.setFont(new java.awt.Font("Bookman Old Style", 3, 24)); // NOI18N
+        categoryPageLabel.setForeground(new java.awt.Color(255, 255, 255));
         categoryPageLabel.setText("Category Page");
-        headingLabel.add(categoryPageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 32, -1, -1));
+        headingLabel.add(categoryPageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 32, 190, -1));
 
+        backButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         backButton.setText("BACK");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,80 +92,96 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
         addDeleteUpdateTabbedPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addDeleteUpdateTabbedPanel.setPreferredSize(new java.awt.Dimension(314, 185));
 
+        deleteCategoryPanel.setBackground(new java.awt.Color(153, 0, 0));
         deleteCategoryPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        deleteCategoryNameLabel.setText("Username");
-        deleteCategoryPanel.add(deleteCategoryNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 60, -1));
+        deleteCategoryNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        deleteCategoryNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        deleteCategoryNameLabel.setText("Category Name");
+        deleteCategoryPanel.add(deleteCategoryNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, -1));
 
         deleteCategoryUserNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCategoryUserNameTFActionPerformed(evt);
             }
         });
-        deleteCategoryPanel.add(deleteCategoryUserNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 200, -1));
+        deleteCategoryPanel.add(deleteCategoryUserNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 200, -1));
 
+        deleteCategoryButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         deleteCategoryButton.setText("REMOVE");
         deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCategoryButtonActionPerformed(evt);
             }
         });
-        deleteCategoryPanel.add(deleteCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
+        deleteCategoryPanel.add(deleteCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
         addDeleteUpdateTabbedPanel.addTab("RM", deleteCategoryPanel);
 
+        updateCategoryPanel.setBackground(new java.awt.Color(153, 0, 0));
         updateCategoryPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        updateCategoryLabel.setText("Username");
-        updateCategoryPanel.add(updateCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, -1));
-        updateCategoryPanel.add(updateCategoryNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 190, -1));
+        updateCategoryLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        updateCategoryLabel.setText("Category Name");
+        updateCategoryPanel.add(updateCategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 120, -1));
+        updateCategoryPanel.add(updateCategoryNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 190, -1));
 
+        updateCategoryButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         updateCategoryButton.setText("UPDATE");
         updateCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateCategoryButtonActionPerformed(evt);
             }
         });
-        updateCategoryPanel.add(updateCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        updateCategoryPanel.add(updateCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         updateCategoryNewNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateCategoryNewNameTFActionPerformed(evt);
             }
         });
-        updateCategoryPanel.add(updateCategoryNewNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 190, -1));
+        updateCategoryPanel.add(updateCategoryNewNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 190, -1));
 
-        updateNewCategoryNameLabel.setText("New Username");
-        updateCategoryPanel.add(updateNewCategoryNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 80, 20));
+        updateNewCategoryNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        updateNewCategoryNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        updateNewCategoryNameLabel.setText("New Category Name");
+        updateCategoryPanel.add(updateNewCategoryNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 140, 20));
 
         addDeleteUpdateTabbedPanel.addTab("UM", updateCategoryPanel);
 
+        addCategoryPanel.setBackground(new java.awt.Color(153, 0, 0));
         addCategoryPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addNameLabel.setText("Name");
-        addCategoryPanel.add(addNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        addNameLabel.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        addNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        addNameLabel.setText("Category Name");
+        addCategoryPanel.add(addNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 100, 20));
 
         addCategoryNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCategoryNameTFActionPerformed(evt);
             }
         });
-        addCategoryPanel.add(addCategoryNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 200, -1));
+        addCategoryPanel.add(addCategoryNameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 200, -1));
 
+        addCategoryButton.setFont(new java.awt.Font("Bookman Old Style", 3, 14)); // NOI18N
         addCategoryButton.setText("ADD");
         addCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCategoryButtonActionPerformed(evt);
             }
         });
-        addCategoryPanel.add(addCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
+        addCategoryPanel.add(addCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
         addDeleteUpdateTabbedPanel.addTab("AM", addCategoryPanel);
 
         getContentPane().add(addDeleteUpdateTabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 640, 180));
 
+        addDeleteUpdateCategoryButtonPanel.setBackground(new java.awt.Color(153, 0, 0));
         addDeleteUpdateCategoryButtonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        addCategoryPanelButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         addCategoryPanelButton.setText("Add Category");
         addCategoryPanelButton.setPreferredSize(new java.awt.Dimension(123, 22));
         addCategoryPanelButton.setVerifyInputWhenFocusTarget(false);
@@ -170,16 +190,18 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
                 addCategoryPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateCategoryButtonPanel.add(addCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 123, 22));
+        addDeleteUpdateCategoryButtonPanel.add(addCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 70, 130, 22));
 
+        deleteCategoryPanelButton.setFont(new java.awt.Font("Bookman Old Style", 3, 12)); // NOI18N
         deleteCategoryPanelButton.setText("Delete Category");
         deleteCategoryPanelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCategoryPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateCategoryButtonPanel.add(deleteCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 123, 22));
+        addDeleteUpdateCategoryButtonPanel.add(deleteCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 110, 130, 22));
 
+        updateCategoryPanelButton.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         updateCategoryPanelButton.setText("Update Category");
         updateCategoryPanelButton.setPreferredSize(new java.awt.Dimension(123, 22));
         updateCategoryPanelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -187,10 +209,11 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
                 updateCategoryPanelButtonActionPerformed(evt);
             }
         });
-        addDeleteUpdateCategoryButtonPanel.add(updateCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 123, 22));
+        addDeleteUpdateCategoryButtonPanel.add(updateCategoryPanelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 140, 22));
 
         getContentPane().add(addDeleteUpdateCategoryButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 160, 190));
 
+        categoryTable.setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -207,6 +230,7 @@ public class CategoryScreen extends javax.swing.JFrame implements Values{
         getContentPane().add(categoryTableScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 800, 250));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

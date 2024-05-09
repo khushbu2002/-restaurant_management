@@ -29,7 +29,7 @@ public class SplasScreen extends javax.swing.JFrame {
         splashPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         progressPercentageLabel = new javax.swing.JLabel();
-        icon = new javax.swing.JLabel();
+        logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 450));
@@ -40,12 +40,12 @@ public class SplasScreen extends javax.swing.JFrame {
         splashPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         progressBar.setBackground(new java.awt.Color(204, 204, 204));
-        progressBar.setForeground(new java.awt.Color(255, 255, 0));
-        splashPanel.add(progressBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 425, 706, 20));
-        splashPanel.add(progressPercentageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 114, 29));
+        progressBar.setForeground(new java.awt.Color(153, 0, 51));
+        splashPanel.add(progressBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 706, 20));
+        splashPanel.add(progressPercentageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 114, 29));
 
-        icon.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\RestoH5.png")); // NOI18N
-        splashPanel.add(icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\acer\\Documents\\NetBeansProjects\\FoodOrderingDesktopApp\\FoodOrderingDesktopApp\\src\\main\\java\\com\\mycompany\\foodorderingdesktopapp\\images\\logo4.png")); // NOI18N
+        splashPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 710, 260));
 
         getContentPane().add(splashPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
@@ -96,7 +96,6 @@ public class SplasScreen extends javax.swing.JFrame {
                 splash.progressBar.setValue(counter);
                 splash.progressPercentageLabel.setText(Integer.toString(counter) + "%");
                 
-               
             }
         } 
         catch (InterruptedException e) {
@@ -111,7 +110,7 @@ public class SplasScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel icon;
+    private javax.swing.JLabel logoLabel;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel progressPercentageLabel;
     private javax.swing.JPanel splashPanel;

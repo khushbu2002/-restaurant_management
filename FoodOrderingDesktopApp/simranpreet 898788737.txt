@@ -1,0 +1,10 @@
+                       Food Ordering                        
+______________________________________________________
+custmer details: 
+
+Name= simranpreet
+Phone Number= 898788737
+Dish Ordered= White Pasta
+Quantity = 10 
+
+Amount Paid= 500
