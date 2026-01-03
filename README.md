@@ -1,6 +1,6 @@
-# Online Restaurant Management System 🍽️
+# Restaurant Management System 🍽️
 
-Online Restaurant Management System is a Java-based desktop application designed to manage restaurant operations such as food ordering, menu handling, and order processing.  
+Restaurant Management System is a Java-based desktop application designed to manage restaurant operations such as food ordering, menu handling, and order processing.  
 The application uses Java Swing for the user interface and Apache XAMPP for backend data handling and storage.
 
 ---
