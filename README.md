@@ -58,5 +58,4 @@ The application uses Java Swing for the user interface and Apache XAMPP for back
 - Convert application into a REST-based backend system
 - Add user authentication and role-based access
 - Improve UI design and user experience
-
 - Add user authentication and role management
