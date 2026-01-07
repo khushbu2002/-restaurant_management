@@ -23,6 +23,7 @@ The application uses Java Swing for the user interface and Apache XAMPP for back
 - Billing and order summary generation
 - Backend validation of user inputs
 - Data storage and retrieval using MySQL
+- SQL Queries
 
 ---
 
