@@ -5,7 +5,7 @@ The application uses Java Swing for the user interface and Apache XAMPP for back
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack -->
 
 - **Language:** Java
 - **UI Framework:** Java Swing
